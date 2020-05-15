@@ -1,0 +1,51 @@
+extends layout.pug
+
+block content
+
+    .container
+         .row
+            .span12
+              form.form-horizontal(action='logged_in' method='POST')
+                fieldset
+                  #legend
+                    legend Login
+                  .control-group
+                    // Username
+                    label.control-label(for='username') Username
+                    .controls
+                      input#username.input-xlarge(type='text' name='username' placeholder=' e.g., spaceman' required)
+                  .control-group
+                    // Password
+                    label.control-label(for='password') Password
+                    .controls
+                      input#password.input-xlarge(type='password' name='password' placeholder=' At least 4 characters' required)
+                  .control-group
+                    // Button
+                    .controls
+                      button.btn.btn-success Login
+            div 
+                if login_error
+                    div(class="alert alert-danger" role="alert") #{login_error}
+         
+            div(class="float-right")
+                nav.navbar.navbar-expand-lg.navbar-light.bg-light
+                  a.navbar-brand(href='/') HOME
+                  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                  #navbarSupportedContent.collapse.navbar-collapse
+                    ul.navbar-nav.mr-auto
+                      li.nav-item.active
+                        a.nav-link(href='coming_soon')
+                          | BOOKS 
+                          span.sr-only (current)
+                      li.nav-item
+                        a.nav-link(href='coming_soon') BLOG
+                      li.nav-item
+                        a.nav-link.disabled(href='coming_soon') ABOUT
+                    form.form-inline.my-2.my-lg-0(action='search' method='GET')
+                      input.form-control.mr-sm-2(type='text' placeholder='eg., ISBN, title, author' aria-label='Search' name='input')
+                      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+                      if error
+                        div(class="alert alert-danger" role="alert") #{error}
+
+    footer(class="footer text-center" style="margin-top: 35%") &copy; All rights reserved

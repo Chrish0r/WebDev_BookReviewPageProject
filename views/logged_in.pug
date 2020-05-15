@@ -1,0 +1,40 @@
+extends layout.pug
+
+block content
+
+    .container
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          a.navbar-brand(href="/") HOME
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+              li.nav-item.active
+                a.nav-link(href='coming_soon')
+                  | BOOKS 
+                  span.sr-only (current)
+              li.nav-item
+                a.nav-link(href='coming_soon') BLOG
+              li.nav-item
+                a.nav-link.disabled(href='coming_soon') ABOUT 
+            form.form-inline.my-2.my-lg-0(action='search' method = 'POST')
+              input.form-control.mr-sm-2(type='text' placeholder='eg., ISBN, title, author' aria-label='Search' name='input')
+              button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+            form(action='/logout' method='GET')
+              button.btn.btn-link.navbar-btn.navbar-link(type='submit' sytle="text-decoration: none;") Logout
+              
+    div(class="list-group")
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | Now you can start to search for books!
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | Check out book reviews from people all over the world!
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | You too can write book reviews!
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | Let the World know what YOU have to say!
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | Be part of a large Community!
+        h1(class="list-group-item list-group-item-action list-group-item-secondary" style="background-color: #55c2180a; color: #0000006b")
+            | If you like, what you see share with your friends!      
+            
+    footer(class="footer text-center" style="margin-top: 5%") &copy; All rights reserved   

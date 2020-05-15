@@ -1,0 +1,68 @@
+extends layout.pug
+
+block content
+
+    .container
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          a.navbar-brand(href="/") HOME
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+              li.nav-item.active
+                a.nav-link(href='coming_soon')
+                  | BOOKS 
+                  span.sr-only (current)
+              li.nav-item
+                a.nav-link(href='coming_soon') BLOG
+              li.nav-item
+                a.nav-link.disabled(href='coming_soon') ABOUT 
+            form.form-inline.my-2.my-lg-0(action='search' method = 'POST')
+              input.form-control.mr-sm-2(type='text' placeholder='eg., ISBN, title, author' aria-label='Search' name='input')
+              button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+                
+            form(action='/logout' method='GET')
+              button.btn.btn-link.navbar-btn.navbar-link(type='submit' sytle="text-decoration: none;") Logout
+              
+        .card-columns
+          .card.h5(style="padding: 2%; color: gray") IMAGE: 
+            h4(style="text-align: center; margin-top: 5%") NOT FOUND!
+            .card-body 
+          .card.h5(style="text-align: center; padding: 2%; color: gray") ISBN: #{found.isbn}
+            h5(style="text-align: center; margin-top: 5%") YEAR OF APPEARANCE: </br> 
+            h5(style="text-align: center; margin-top: 5%") #{found.year}
+            
+          .card.h5(style="padding: 2%; color: gray") TITLE:
+            h2(style="text-align: center; margin-top: 5%") '#{found.title}'
+            .card-body 
+          .card.h5(style="padding: 2%; color: gray") AUTHOR:
+            h4(style="text-align: center; margin-top: 5%") #{found.author}
+          .card.h5(style="padding: 2%; color: gray") Description: 
+             h4(style="text-align: center; padding:10%; margin-top: 5%") Coming soon...
+          
+        div(style="margin-top: 5%")
+            .panel-body
+                form.form-inline.my-2.my-lg-0(action="/books_details/"+found.id method="POST")
+                    input.form-control.mr-sm-2(placeholder='write a comment...' type='text' name='review' required)
+                    input.form-control.mr-sm-2(type="hidden", value=found.id, name="book_id")
+                    button.btn.btn-info.pull-right(type='submit') Post
+                    input#input-1.rating.rating-loading(style="margin-left: 1%" name='rating' placeholder='rating between 1 and 5...' data-min='1' data-max='5' data-step='1.0' required)
+        
+        div(style="margin-top: 5%")
+            
+            table.table.table-striped.table-bordered
+                thead
+                    tr
+                      th(scope="col" width="20%") USER 
+                      th(scope="col" width="20%") REVIEW
+                      th(scope="col" width="20%") RATING
+                      
+                each _, i in reviews
+                    tbody
+                        tr
+                          td #{reviews[i].username}
+                          td #{reviews[i].book_review}
+                          td #{reviews[i].rating} Stars
+                          
+        footer(class="footer text-center" style="margin-top: 2%") &copy; All rights reserved
+                          

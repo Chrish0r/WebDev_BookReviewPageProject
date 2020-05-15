@@ -1,0 +1,78 @@
+extends layout.pug
+
+block title
+  title error
+
+block content
+  .container
+    if error 
+        div(class="alert alert-danger" role="alert") #{error}
+        
+        div
+            p If you want to go back,  
+                a.nav-link(href='/') click here.
+        .row
+            .span12
+              form.form-horizontal(action='logged_in' method='POST')
+                fieldset
+                  #legend
+                    legend Login
+                  .control-group
+                    // Username
+                    label.control-label(for='username') Username
+                    .controls
+                      input#username.input-xlarge(type='text' name='username' placeholder=' e.g., spaceman' required)
+                  .control-group
+                    // Password
+                    label.control-label(for='password') Password
+                    .controls
+                      input#password.input-xlarge(type='password' name='password' placeholder=' At least 4 characters' required)
+                  .control-group
+                    // Button
+                    .controls
+                      button.btn.btn-success Login	
+    if login_error 
+        div(class="alert alert-danger" role="alert") #{login_error}
+        
+        div
+            p If you want to go back,  
+                a.nav-link(href='/') click here.
+        .row
+            .span12
+              form.form-horizontal(action='logged_in' method='POST')
+                fieldset
+                  #legend
+                    legend Login
+                  .control-group
+                    // Username
+                    label.control-label(for='username') Username
+                    .controls
+                      input#username.input-xlarge(type='text' name='username' placeholder=' e.g., spaceman' required)
+                  .control-group
+                    // Password
+                    label.control-label(for='password') Password
+                    .controls
+                      input#password.input-xlarge(type='password' name='password' placeholder=' At least 4 characters' required)
+                  .control-group
+                    // Button
+                    .controls
+                      button.btn.btn-success Login			  
+
+        footer(class="footer text-center" style="margin-top: 20%") &copy; All rights reserved
+    
+    if rating_error
+        div(class="alert alert-danger" role="alert") #{rating_error}
+        
+        div
+            p If you want to go back,  
+                a.nav-link(href='/') click here.
+        .row
+            .span12
+              form(action='/logout' method='GET')
+                button.btn.btn-link.navbar-btn.navbar-link(type='submit' sytle="text-decoration: none;") Logout	  
+
+        footer(class="footer text-center" style="margin-top: 20%") &copy; All rights reserved
+    
+
+    
+    

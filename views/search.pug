@@ -1,0 +1,59 @@
+extends layout.pug
+
+block content
+    
+    .container
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          a.navbar-brand(href="/") HOME
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+              li.nav-item.active
+                a.nav-link(href='coming_soon')
+                  | BOOKS 
+                  span.sr-only (current)
+              li.nav-item
+                a.nav-link(href='coming_soon') BLOG
+              li.nav-item
+                a.nav-link.disabled(href='coming_soon') ABOUT 
+            form.form-inline.my-2.my-lg-0(action='search' method = 'POST')
+              input.form-control.mr-sm-2(type='text' placeholder='eg., ISBN, title, author' aria-label='Search' name='input')
+              button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+            form(action='/logout' method='GET')
+              button.btn.btn-link.navbar-btn.navbar-link(type='submit' sytle="text-decoration: none;") Logout
+    if found
+        .card
+        if found.length === 1
+            div(class="card-header text-center")
+                h1(style="color: #0000009c") One Book found! 
+        else
+            div(class="card-header text-center")
+                h1(style="color: #0000009c") #{found.length} Books found!
+                
+        .card
+          .card-body
+            table.table.table-striped.table-bordered
+                thead
+                    tr
+                      th(scope="col" width="20%") Title 
+                      th(scope="col" width="20%") Author
+                      th(scope="col" width="20%") Year
+                      th(scope="col" width="20%") ISBN
+                      th(scope="col" width="20%") Details
+                each _, i in found
+                    tbody
+                        tr
+                          td #{found[i].title}  
+                          td #{found[i].author}
+                          td #{found[i].year}
+                          td #{found[i].isbn}
+                          td 
+                            form(action="books_details/"+found[i].id method="GET")
+                                button.btn.btn-secondary(class="text-center" type="submit") GET DETAILS
+    else
+      .card
+        .card-body
+          div(class="alert alert-danger" role="alert") #{search_error}
+          
+    footer(class="footer text-center" style="margin-top: 20%") &copy; All rights reserved 
